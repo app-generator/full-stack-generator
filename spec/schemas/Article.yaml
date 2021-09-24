@@ -1,0 +1,22 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+  author:
+    $ref: ./User.yaml
+  category:
+    type: string
+    description: Category
+    enum: [BLOG,FRONT_PAGE]
+  title:
+    type: string
+    description: Title
+  slug:
+    type: string
+  text:
+    type: string
+  publishDate:
+    type: string
+    format: date-time
+    description: Published Date

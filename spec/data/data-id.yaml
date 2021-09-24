@@ -1,0 +1,52 @@
+put:
+  tags:
+    - data
+  summary: Modify a data item
+  operationId: updateData
+  parameters:
+    - in: path
+      required: true
+      name: id
+      schema:
+        type: string
+        format: uuid
+  requestBody:
+    description: Data that is updated
+    content:
+      application/json:
+        schema:
+          $ref: ../schemas/Data.yaml
+  responses:
+    "200":
+      description: Data updated
+      content:
+        application/json:
+          schema:
+            $ref: ../schemas/Data.yaml
+    "404":
+      description: Data item not found
+    "400":
+      description: Invalid object supplied
+  security:
+    - auth:
+        - "openid"
+delete:
+  tags:
+    - data
+  summary: Delete a data item
+  operationId: deleteData
+  parameters:
+    - in: path
+      required: true
+      name: id
+      schema:
+        type: string
+        format: uuid
+  responses:
+    "200":
+      description: Data deleted
+    "404":
+      description: Data item not found
+  security:
+    - auth:
+        - "openid"

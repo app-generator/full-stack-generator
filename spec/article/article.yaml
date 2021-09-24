@@ -1,0 +1,65 @@
+get:
+  tags:
+    - article
+  summary: Get all articles
+  operationId: getArticles
+  parameters:
+    - in: query
+      name: category
+      schema:
+        type: string
+        default: BLOG
+    - in: query
+      name: filter
+      schema:
+        type: string
+    - in: query
+      name: language
+      schema:
+        type: string
+        default: en
+    - in: query
+      name: page
+      schema:
+        type: integer
+        default: 0
+    - in: query
+      name: itemsPerPage
+      schema:
+        type: integer
+        default: 20
+  responses:
+    "200":
+      description: Articles retrieved
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../schemas/Article.yaml
+
+post:
+  tags:
+    - article
+  summary: Add an article
+  operationId: addArticle
+  requestBody:
+    description: Article object that needs to be added
+    content:
+      application/json:
+        schema:
+          $ref: ../schemas/Article.yaml
+    required: true
+  responses:
+    "200":
+      description: Article created
+      content:
+        application/json:
+          schema:
+            $ref: ../schemas/Article.yaml
+    "400":
+      description: Invalid object supplied
+      content: {}
+  security:
+    - auth:
+        - "openid"

@@ -1,0 +1,45 @@
+get:
+  tags:
+    - data
+  summary: Get all data
+  operationId: getData
+  parameters:
+    - in: query
+      name: type
+      schema:
+        type: string
+  responses:
+    "200":
+      description: Data retrieved
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../schemas/Data.yaml
+
+post:
+  tags:
+    - data
+  summary: Add a data item
+  operationId: addData
+  requestBody:
+    description: Data object that needs to be added
+    content:
+      application/json:
+        schema:
+          $ref: ../schemas/Data.yaml
+    required: true
+  responses:
+    "200":
+      description: Data item created
+      content:
+        application/json:
+          schema:
+            $ref: ../schemas/Data.yaml
+    "400":
+      description: Invalid object supplied
+      content: {}
+  security:
+    - auth:
+        - "openid"

@@ -1,0 +1,36 @@
+openapi: 3.0.1
+info:
+  title: NodeJS API Seed
+  description: >-
+   API Seed with NodeJs and OpenAPI
+  version: 1.0.0
+servers:
+  - url: "http://localhost:9000/"
+tags:
+  - name: article
+    description: Everything concerning articles, comments 
+  - name: user
+    description: Operations about users
+
+paths:
+  /article:
+    $ref: "./article/article.yaml"
+  /article/{id}:
+    $ref: "./article/article-id.yaml"
+  /user:
+    $ref: "./user/user.yaml"
+  /user/{id}:
+    $ref: "./user/user-id.yaml"
+  /data:
+    $ref: "./data/data.yaml"
+  /data/{id}:
+    $ref: "./data/data-id.yaml"
+  
+
+components:
+  schemas:
+    $ref: "./schemas/_index.yaml"
+  securitySchemes:
+    auth:
+      type: openIdConnect
+      openIdConnectUrl: https://seed.eu.auth0.com/.well-known/openid-configuration

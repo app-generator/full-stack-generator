@@ -1,0 +1,6 @@
+Article:
+  $ref: ./Article.yaml
+User:
+  $ref: ./User.yaml
+Data:
+  $ref: ./Data.yaml

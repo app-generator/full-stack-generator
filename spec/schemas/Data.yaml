@@ -1,0 +1,18 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+  type:
+    type: string
+    description: Data category
+    enum: [FOR_BAR_CHART, FOR_TIME_SERIES, FOR_PIE_CHART,FOR_TABLE]
+  name:
+    type: string
+    description: Name
+  value:
+    type: integer
+  timestamp:
+    type: string
+    format: date-time
+    description: Data Timestamp

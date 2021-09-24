@@ -1,0 +1,57 @@
+get:
+  tags:
+    - user
+  summary: Get all users
+  operationId: getUsers
+  parameters:
+    - in: query
+      name: filter
+      schema:
+        type: string
+    - in: query
+      name: page
+      schema:
+        type: integer
+        default: 0
+    - in: query
+      name: itemsPerPage
+      schema:
+        type: integer
+        default: 20
+  responses:
+    "200":
+      description: Retrieved users
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: ../schemas/User.yaml
+  security:
+    - auth:
+        - "openid"
+
+post:
+  tags:
+    - user
+  summary: Add user
+  operationId: addUser
+  requestBody:
+    description: User to add
+    content:
+      application/json:
+        schema:
+          $ref: ../schemas/User.yaml
+    required: true
+  responses:
+    "201":
+      description: User created
+      content:
+        application/json:
+          schema:
+            $ref: ../schemas/User.yaml
+    "400":
+      description: Invalid object supplied
+  security:
+    - auth:
+        - "openid"
