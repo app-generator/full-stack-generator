@@ -1,27 +1,31 @@
 // https://dev.to/kdhttps/appauth-js-integration-in-react-1m3e
 
 import Button from "@mui/material/Button";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { handleCallback, login, logout } from "./authService";
 import { checkAuth, selectAuth } from "./authSlice";
 
-export const Callback = (props: any) => {
+export const Callback = () => {
   const dispatch = useAppDispatch();
+  const [done, setDone] = useState(false);
 
   useEffect(
     function () {
       handleCallback(
-        () => dispatch(checkAuth()),
-        error => console.log(error)
+        () => {
+          dispatch(checkAuth());
+          setDone(true);
+        },
+        error => console.error(error)
       );
     },
-    [props, dispatch]
+    [dispatch]
   );
 
-  return (<div></div>)
+  return done ? (<Redirect to="/dashboard" />) : (<div></div>)
 };
 
 export const AuthBox = () => {
@@ -39,11 +43,11 @@ export const AuthBox = () => {
 
   return authState.isAuthenticated ? (
     <Button color="inherit" onClick={() => { logout(); dispatch(checkAuth()); history.push('/'); }}>
-      {t("Logout")}
+      {t("app.logout")}
     </Button>
   ) : (
     <Button color="inherit" onClick={() => login()}>
-      {t("Login")}
+      {t("app.login")}
     </Button>
   );
 }

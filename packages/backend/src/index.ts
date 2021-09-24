@@ -9,6 +9,7 @@ import swaggerUi from "swagger-ui-express";
 import { createConnection } from "typeorm";
 import YAML from "yamljs";
 import { articleController } from "./controller/article-controller";
+import { dataController } from "./controller/data-controller";
 import { userController } from "./controller/user-controller";
 
 
@@ -57,6 +58,7 @@ export async function main(): Promise<void> {
 
   app.use("/user", userController());
   app.use("/article", articleController());
+  app.use("/data", dataController());
 
   /**
    * Error Handler

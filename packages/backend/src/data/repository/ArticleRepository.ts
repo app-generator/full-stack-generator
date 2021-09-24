@@ -1,11 +1,11 @@
 import { Article, GetArticlesRequest } from "generated-api";
-import { getRepository, Like } from "typeorm";
+import { getRepository } from "typeorm";
 import { ArticleEntity } from "../entity/Article";
 
 export class ArticleRepository {
   public async getArticles(params: GetArticlesRequest): Promise<Article[]> {
     return getRepository(ArticleEntity).find({
-      where: { title: Like(`%${params.filter}%`) },
+      where: { category:params.category },
       take: params.itemsPerPage || 20,
       skip: (params.page || 0) * (params.itemsPerPage || 20),
     });

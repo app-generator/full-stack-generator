@@ -1,5 +1,10 @@
 {
-    "Users": "Utilizatori",
-    "Login": "Autentificare",
-    "Logout":"Ieșire"
+  "app.login": "Autentificare",
+  "app.logout":"Ieșire",
+  "jumbotron.title": "Bine ați venit",
+  "jumbotron.subtitle": "Exemplu de aplicație cu OpenAPI + Express + React",
+  "dashboard.table": "Un tabel",
+  "dashboard.pieChart": "Un Grafic pe Cerc",
+  "dashboard.barChart": "Un Grafic cu Bare",
+  "dashboard.timeSeries": "Un Grafic cu Serie de Timp"
   }

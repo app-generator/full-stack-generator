@@ -1,5 +1,10 @@
 {
-    "Users": "Users",
-    "Login": "Login",
-    "Logout":"Logout"
+    "app.login": "Login",
+    "app.logout":"Logout",
+    "jumbotron.title": "Welcome",
+    "jumbotron.subtitle": "OpenAPI + Express + React Seed",
+    "dashboard.table": "A Table",
+    "dashboard.pieChart": "A Pie Chart",
+    "dashboard.barChart": "A Bar Chart",
+    "dashboard.timeSeries": "A Time series Chart"
   }

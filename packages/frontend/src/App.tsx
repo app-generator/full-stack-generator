@@ -7,8 +7,8 @@ import { Route, Switch } from "react-router-dom";
 import { useAppSelector } from "./app/hooks";
 import { AuthBox, Callback } from "./features/auth/Auth";
 import { selectAuth } from "./features/auth/authSlice";
+import { Dashboard } from "./features/dashboard/Dashboard";
 import { Landing } from "./features/landing/Landing";
-import { UserList } from "./features/user-list/UserList";
 import GuardedRoute from "./GuardedRoute";
 import logo from "./logo.png";
 import { theme } from "./theme";
@@ -32,8 +32,8 @@ export default function App() {
             <Route exact path="/">
               <Landing />
             </Route>
-            <GuardedRoute path="/user-list" predicate={() => authState.isAuthenticated}>
-              <UserList />
+            <GuardedRoute path="/dashboard" predicate={() => authState.isAuthenticated}>
+              <Dashboard />
             </GuardedRoute>
             <Route exact path="/callback" component={Callback}/>
           </Switch>
