@@ -1,10 +1,24 @@
 {
   "app.login": "Autentificare",
-  "app.logout":"Ieșire",
+  "app.logout": "Ieșire",
   "jumbotron.title": "Bine ați venit",
   "jumbotron.subtitle": "Exemplu de aplicație cu OpenAPI + Express + React",
+  "home": "Acasă",
+  "dashboard": "Tablou de control",
   "dashboard.table": "Un tabel",
   "dashboard.pieChart": "Un Grafic pe Cerc",
   "dashboard.barChart": "Un Grafic cu Bare",
-  "dashboard.timeSeries": "Un Grafic cu Serie de Timp"
-  }
+  "dashboard.timeSeries": "Un Grafic cu Serie de Timp",
+  "data.id": "Id",
+  "data.timestamp": "Dată/oră",
+  "data.name": "Denumire",
+  "data.value": "Valoare",
+  "dataGrid.columnMenuLabel": "Meniu coloană",
+  "dataGrid.columnMenuShowColumns": "Arată coloane",
+  "dataGrid.columnMenuFilter": "Filtrează",
+  "dataGrid.columnMenuHideColumn": "Ascunde coloana",
+  "dataGrid.columnMenuUnsort": "Eliminare sortare",
+  "dataGrid.columnMenuSortAsc": "Sortare crescător",
+  "dataGrid.columnMenuSortDesc": "Sortare descrescător",
+  "dataGrid.of": "din"
+}

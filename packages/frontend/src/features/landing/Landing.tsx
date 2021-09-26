@@ -1,6 +1,7 @@
 import Card from "@mui/material/Card";
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
+import Grid from "@mui/material/Grid";
 import LinearProgress from "@mui/material/LinearProgress";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
@@ -26,15 +27,11 @@ const jumbotronTextStyle: CSSProperties = {
 }
 
 const articleSectionStyle: CSSProperties = {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around'
+    padding:10
 }
 
 const articleStyle: CSSProperties = {
-    width: 400,
-    margin: 10
+    height: 350
 }
 
 export const Landing = () => {
@@ -57,19 +54,21 @@ export const Landing = () => {
             </Typography>
         </Paper>
         {articleState.loading && <LinearProgress />}
-        <Paper style={articleSectionStyle}>
+        <Grid container spacing={5} style={articleSectionStyle}>
             {
                 articleState.articles.map(article => (
-                    <Card style={articleStyle} key={article.id}>
-                        <CardHeader title={article.title} subheader={moment(article.publishDate).format('L')} />
-                        <CardContent>
-                            <Typography variant="body2" color="text.secondary">
-                                {article.text}
-                            </Typography>
-                        </CardContent>
-                    </Card>
+                    <Grid item xs={4} key={article.id}>
+                        <Card style={articleStyle}>
+                            <CardHeader title={article.title} subheader={moment(article.publishDate).format('L')} />
+                            <CardContent>
+                                <Typography variant="body2" color="text.secondary">
+                                    {article.text}
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    </Grid>
                 ))
             }
-        </Paper>
+        </Grid>
     </Paper>
 }

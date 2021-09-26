@@ -1,10 +1,24 @@
 {
-    "app.login": "Login",
-    "app.logout":"Logout",
-    "jumbotron.title": "Welcome",
-    "jumbotron.subtitle": "OpenAPI + Express + React Seed",
-    "dashboard.table": "A Table",
-    "dashboard.pieChart": "A Pie Chart",
-    "dashboard.barChart": "A Bar Chart",
-    "dashboard.timeSeries": "A Time series Chart"
-  }
+  "app.login": "Login",
+  "app.logout": "Logout",
+  "jumbotron.title": "Welcome",
+  "jumbotron.subtitle": "OpenAPI + Express + React Seed",
+  "home": "Home",
+  "dashboard": "Dashboard",
+  "dashboard.table": "A Table",
+  "dashboard.pieChart": "A Pie Chart",
+  "dashboard.barChart": "A Bar Chart",
+  "dashboard.timeSeries": "A Time series Chart",
+  "data.id": "Id",
+  "data.timestamp": "Timestamp",
+  "data.name": "Name",
+  "data.value": "Value",
+  "dataGrid.columnMenuLabel": "Column Menu",
+  "dataGrid.columnMenuShowColumns": "Show Columns",
+  "dataGrid.columnMenuFilter": "Filter",
+  "dataGrid.columnMenuHideColumn": "Hide Column",
+  "dataGrid.columnMenuUnsort": "Unsort",
+  "dataGrid.columnMenuSortAsc": "Sort ascending",
+  "dataGrid.columnMenuSortDesc": "Sort descending",
+  "dataGrid.of": "of"
+}

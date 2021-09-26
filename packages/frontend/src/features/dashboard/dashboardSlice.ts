@@ -34,7 +34,7 @@ export const loadPieChartData = createAsyncThunk(
 
 export const loadTableData = createAsyncThunk(
   "dashboard/loadTableData",
-  async () =>  api().withPreMiddleware(authHeaderMiddleware).getData({ type: 'FORTABLE' })
+  async () =>  api().withPreMiddleware(authHeaderMiddleware).getData({ type: 'FOR_TABLE' })
 );
 
 export const loadTimeSeriesData = createAsyncThunk(
