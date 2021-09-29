@@ -39,7 +39,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "select-ui:mui": "node ./select-ui mui",
+    "select-ui:chakra": "node ./select-ui chakra"
   },
   "eslintConfig": {
     "extends": "react-app"
