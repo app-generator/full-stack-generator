@@ -19,7 +19,7 @@ export default function App() {
     <ChakraProvider theme={theme}>
       <Flex grow={1} direction="column">
         <Flex as="nav" bg="brand.100" padding={2} direction="row" justifyContent="space-between" alignItems="center">
-          <Flex>
+          <Flex alignItems="center">
             <img src={logo} alt="AppSeed" style={{ maxWidth: 200 }} />
             <Nav />
           </Flex>

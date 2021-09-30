@@ -1,10 +1,6 @@
+import { Box, Flex, Heading, Progress, SimpleGrid, Text } from "@chakra-ui/react";
 import moment from "moment";
 import { useEffect } from "react";
-import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
-import ProgressBar from 'react-bootstrap/ProgressBar';
-import Row from 'react-bootstrap/Row';
 import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { loadFrontPageArticles, selectLandingPage } from "./landingPageSlice";
@@ -19,30 +15,32 @@ export const Landing = () => {
         dispatch(loadFrontPageArticles());
     }, [dispatch]);
 
-    return <Container fluid>
-        <Row className="bg-primary mb-5">
-            <h1 className="text-center text-light" style={{ marginTop: 150, marginBottom: 100 }}>
+    return <Flex direction="column">
+        <Flex direction="column" bg="brand.900" alignItems="center">
+            <Heading as="h1" size="4xl" color="brand.100" marginTop={60}>
                 {t('jumbotron.title')}
-            </h1>
-            <h2 className="text-center text-light" style={{ marginBottom: 100 }}>
+            </Heading>
+            <Heading as="h2" size="2xl" color="brand.100" marginTop={20} marginBottom={20}>
                 {t('jumbotron.subtitle')}
-            </h2>
-        </Row>
-        {articleState.loading && <ProgressBar />}
-        <Row>
+            </Heading>
+        </Flex>
+        {articleState.loading && <Progress />}
+        <SimpleGrid spacing={5} padding={5} minChildWidth={400}>
             {
                 articleState.articles.map(article => (
-                    <Col xs={4} key={article.id}>
-                        <Card className="p-3 mb-3">
-                            <Card.Title>{article.title}</Card.Title>
-                            <Card.Subtitle>{moment(article.publishDate).format('L')}</Card.Subtitle>
-                            <Card.Text>
-                                {article.text}
-                            </Card.Text>
-                        </Card>
-                    </Col>
+                    <Box key={article.id} borderWidth="1px" borderRadius="lg" padding={3}>
+                        <Heading as="h3" size="md" marginBottom={5}>
+                            {article.title}
+                        </Heading>
+                        <Text as="h4" size="md">
+                            {moment(article.publishDate).format('L')}
+                        </Text>
+                        <Text as="p">
+                            {article.text}
+                        </Text>
+                    </Box>
                 ))
             }
-        </Row>
-    </Container>
+        </SimpleGrid>
+    </Flex>
 }

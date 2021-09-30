@@ -1,5 +1,5 @@
+import { Button } from '@chakra-ui/react';
 import { Fragment } from "react";
-import Button from 'react-bootstrap/Button';
 import { useTranslation } from "react-i18next";
 import { useHistory, useLocation } from "react-router-dom";
 import { useAppSelector } from "../../app/hooks";
@@ -14,6 +14,6 @@ export const Nav = () => {
 
     return <Fragment>
         {authState.isAuthenticated && location.pathname !== '/dashboard' && <Button onClick={() => history.push('/dashboard')}>{t('dashboard')}</Button>}
-        {location.pathname !== '/' && <Button  onClick={() => history.push('/')}>{t('home')}</Button>}
+        {location.pathname !== '/' && <Button onClick={() => history.push('/')}>{t('home')}</Button>}
     </Fragment>
 }
