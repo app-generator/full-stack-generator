@@ -3,13 +3,13 @@ const path = require("path")
 
 const ui = process.argv[2] || 'mui';
 
-const uiPattern = RegExp(`^(.+)\.${ui}.(ts|tsx)$`,'g');
-const ignorePattern = /(node_modules)/g
-
 const processFiles = function (dirPath) {
     const files = fs.readdirSync(dirPath)
 
     files.forEach(function (file) {
+        const uiPattern = RegExp(`^(.+)\.${ui}._(ts|tsx|scss|css)$`,'g');
+        const ignorePattern = /(node_modules)/g;
+
         if (ignorePattern.test(file)) {
             return;
         }

@@ -1,0 +1,9 @@
+// change the theme
+$theme-colors: (
+  "primary": #6500f7,
+  "danger": #ff4136,
+  "light": #fffafa
+);
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
