@@ -3,7 +3,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("data")
 export class DataEntity implements Data {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn()
   id!: string;
 
   @Column()
@@ -12,7 +12,7 @@ export class DataEntity implements Data {
   @Column({ type: "integer" })
   value!: number;
 
-  @Column({name:"timestamp", type: "timestamp with time zone" })
+  @Column({name:"timestamp", type: "text" })
   timestamp: Date = new Date();
 
   @Column({ type: "varchar" })

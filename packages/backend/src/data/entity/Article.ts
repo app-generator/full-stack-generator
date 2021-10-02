@@ -4,7 +4,7 @@ import { UserEntity } from "./User";
 
 @Entity("article")
 export class ArticleEntity implements Article {
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn()
   id!: string;
 
   @Column()
@@ -13,7 +13,7 @@ export class ArticleEntity implements Article {
   @Column({ type: "text" })
   text!: string;
 
-  @Column({name:"publish_date", type: "timestamp with time zone" })
+  @Column({name:"publish_date", type: "text" })
   publishDate: Date = new Date();
 
   @Column({type:"varchar"})

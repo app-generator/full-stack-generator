@@ -103,3 +103,5 @@ api-bundle.yaml
 openapitools.json
 generated/
 generated-compiled/
+
+appseed.sql
