@@ -46,7 +46,7 @@ export const AuthBox = () => {
       {t("app.logout")}
     </Button>
   ) : (
-    <Button onClick={() => login()}>
+    <Button onClick={async () => await login()}>
       {t("app.login")}
     </Button>
   );

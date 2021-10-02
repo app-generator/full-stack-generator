@@ -32,80 +32,94 @@ const getAuthorizationHandler = () => new RedirectRequestHandler(
     new DefaultCrypto()
 );
 
-const getAuthorizationListener = (
-    onSuccess: (response: TokenResponse) => void,
-    onError: (error: any) => void) => (
-    (request: AuthorizationRequest, response: AuthorizationResponse | null, error: any) => {
-        if (response) {
-            const tokenHandler = new BaseTokenRequestHandler(new FetchRequestor());
-            let extras: any = {};
-            if (request && request.internal) {
-                extras.code_verifier = request.internal.code_verifier;
+const fetchToken =
+    async (request: AuthorizationRequest, response: AuthorizationResponse): Promise<TokenResponse> => {
+        const tokenHandler = new BaseTokenRequestHandler(new FetchRequestor());
+        let extras: any = {};
+        if (request && request.internal) {
+            extras.code_verifier = request.internal.code_verifier;
+        }
+
+        const tokenRequest = new TokenRequest({
+            client_id: process.env.REACT_APP_AUTH_CLIENT_ID!,
+            redirect_uri: `${window.location.origin}/callback`,
+            grant_type: GRANT_TYPE_AUTHORIZATION_CODE,
+            code: response.code,
+            refresh_token: undefined,
+            extras,
+        });
+
+        try {
+
+            const authServiceConfig: AuthorizationServiceConfiguration = await AuthorizationServiceConfiguration.fetchFromIssuer(
+                process.env.REACT_APP_OPENID_ISSUER!,
+                new FetchRequestor()
+            );
+
+            const tokenResponse: TokenResponse = await tokenHandler.performTokenRequest(
+                authServiceConfig,
+                tokenRequest
+            );
+
+            localStorage.setItem('access_token', tokenResponse.accessToken);
+            if (!!tokenResponse.idToken) {
+                localStorage.setItem("id_token", tokenResponse.idToken);
+                localStorage.setItem(
+                    "email",
+                    (jwt(tokenResponse.idToken) as any).email
+                );
             }
 
-            const tokenRequest = new TokenRequest({
-                client_id: process.env.REACT_APP_AUTH_CLIENT_ID!,
-                redirect_uri: `${window.location.origin}/callback`,
-                grant_type: GRANT_TYPE_AUTHORIZATION_CODE,
-                code: response.code,
-                refresh_token: undefined,
-                extras,
-            });
+            localStorage.setItem(
+                "expiresAt",
+                moment().add(tokenResponse.expiresIn || 0, 's').toISOString()
+            );
 
+            return Promise.resolve(tokenResponse);
+        } catch (err) {
+            return Promise.reject(err)
+        }
+    }
+
+const getAuthorizationListener = (onSuccess: (token: TokenResponse) => void, onError: (error: any) => void) =>
+    (request: AuthorizationRequest, response: AuthorizationResponse | null, error: any) => {
+        if (error) {
+            onError(error)
+        }
+
+        if (!response) {
+            onError('No auth response received');
+        }
+
+        fetchToken(request, response!)
+            .then(token => onSuccess(token))
+            .catch(err => onError(err));
+    }
+
+export const login = async (): Promise<void> => {
+    const authServiceConfiguration: AuthorizationServiceConfiguration =
+        await
             AuthorizationServiceConfiguration.fetchFromIssuer(
                 process.env.REACT_APP_OPENID_ISSUER!,
                 new FetchRequestor()
-            )
-                .then((oResponse) => {
-                    const configuration = oResponse;
-                    return tokenHandler.performTokenRequest(
-                        configuration,
-                        tokenRequest
-                    );
-                })
-                .then((oResponse) => {
-                    localStorage.setItem('access_token', oResponse.accessToken);
-                    if (!!oResponse.idToken) {
-                        localStorage.setItem("id_token", oResponse.idToken);
-                        localStorage.setItem(
-                            "email",
-                            (jwt(oResponse.idToken) as any).email
-                        );
-                    }
+            );
 
-                    localStorage.setItem(
-                        "expiresAt",
-                        moment().add(oResponse.expiresIn || 0,'s').toISOString()
-                    );
-
-                    onSuccess(oResponse);
-                })
-                .catch((oError) => onError(oError));
-        }
-    });
-
-export const login = () => {
-    AuthorizationServiceConfiguration.fetchFromIssuer(
-        process.env.REACT_APP_OPENID_ISSUER!,
-        new FetchRequestor()
-    ).then((response) => {
-        const authorizationHandler = getAuthorizationHandler();
-        const authRequest = new AuthorizationRequest(
-            {
-                client_id: process.env.REACT_APP_AUTH_CLIENT_ID!,
-                redirect_uri: `${window.location.origin}/callback`,
-                scope: `openid profile email ${process.env.REACT_APP_AUTH_SCOPE!}`,
-                response_type: AuthorizationRequest.RESPONSE_TYPE_CODE,
-                state: undefined,
-                extras: { audience: "node-api" },
-                // extras: environment.extra
-            },
-            undefined,
-            true
-        );
-        authorizationHandler.performAuthorizationRequest(response, authRequest);
-    });
-};
+    const authorizationHandler = getAuthorizationHandler();
+    const authRequest = new AuthorizationRequest(
+        {
+            client_id: process.env.REACT_APP_AUTH_CLIENT_ID!,
+            redirect_uri: `${window.location.origin}/callback`,
+            scope: `openid profile email ${process.env.REACT_APP_AUTH_SCOPE!}`,
+            response_type: AuthorizationRequest.RESPONSE_TYPE_CODE,
+            state: undefined,
+            extras: { audience: "node-api" },
+            // extras: environment.extra
+        },
+        undefined,
+        true
+    );
+    authorizationHandler.performAuthorizationRequest(authServiceConfiguration, authRequest);
+}
 
 export const logout = () => {
     localStorage.removeItem("access_token");
