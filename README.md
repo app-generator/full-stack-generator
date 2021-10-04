@@ -137,3 +137,20 @@ A special note for the authentication flow: this project uses the [Authenticatio
 The project is configured with a demo Auth0 client.
 
 Modify the backend [.env](./packages/backend/.env) and frontend [.env](./packages/frontend/.env) to contain your IDP configuration.
+
+Here are a few major providers of OpenID Connect / OAuth2 platforms (IDPs):
+
+- Microsoft - https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-protocols-oidc
+- Okta - https://developer.okta.com/docs/guides/implement-grant-type/authcodepkce/main/#next-steps
+- Auth0 - https://auth0.com/docs/get-started
+
+For the Authentication Code flow, you'll need the following items:
+- the `issuer uri`, which is a URL provided by the IDP for your tenant
+- the `client id`, which is an id associated with a certain application where the user performs the authentication (i.e. on the same tenant, you can connect multiple applications and users can authenticate for any of these applications with the same credentials / SSO)
+- the `audience`, which is the id associated with a certain application that receives and verifies the Access Tokens (i.e. your backend in this case)
+- the `scopes`, i.e. the privileges you can assign to various users (e.g. `write_access`, `admin_access`, etc.)
+- the `jwks uri`, which is a public resource associated with your tenant, containing the JSON Web Keys (public keys) that can be used to verify the signatures on your JWTs; 
+
+Note that all OpenID providers have a `.well-known` path containing many of the information you require, once you are onboarded (e.g. https://node-seed.eu.auth0.com/.well-known/openid-configuration)
+
+If you want to test the solution locally, you can also use Keycloak, the most popular open source IDP - for example using their [Docker guide](https://www.keycloak.org/getting-started/getting-started-docker).
