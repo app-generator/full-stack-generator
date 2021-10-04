@@ -1,6 +1,6 @@
 // https://dev.to/kdhttps/appauth-js-integration-in-react-1m3e
 
-import { Button } from "@chakra-ui/react";
+import Button from "@mui/material/Button";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Redirect, useHistory } from "react-router-dom";
@@ -42,11 +42,11 @@ export const AuthBox = () => {
   );
 
   return authState.isAuthenticated ? (
-    <Button onClick={() => { logout(); dispatch(checkAuth()); history.push('/'); }}>
+    <Button color="inherit" onClick={() => { logout(); dispatch(checkAuth()); history.push('/'); }}>
       {t("app.logout")}
     </Button>
   ) : (
-    <Button onClick={async () => await login()}>
+    <Button color="inherit" onClick={() => login()}>
       {t("app.login")}
     </Button>
   );

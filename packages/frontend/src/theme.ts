@@ -1,12 +1,28 @@
-import { extendTheme } from "@chakra-ui/react"
-
-const colors = {
-    brand: {
-        900: "#1a365d",
-        800: "#153e75",
-        700: "#2a69ac",
-        100: "#f7fafc",
+import { createTheme, ThemeOptions } from '@mui/material/styles';
+export const themeOptions: ThemeOptions = {
+    palette: {
+        mode: 'light',
+        primary: {
+            main: '#e7ecfc',
+        },
+        secondary: {
+            main: '#6500f7',
+        },
     },
-}
+    typography: {
+        fontFamily: [
+          '-apple-system',
+          'BlinkMacSystemFont',
+          '"Segoe UI"',
+          'Roboto',
+          '"Helvetica Neue"',
+          'Arial',
+          'sans-serif',
+          '"Apple Color Emoji"',
+          '"Segoe UI Emoji"',
+          '"Segoe UI Symbol"',
+        ].join(','),
+      },
+};
 
-export const theme = extendTheme({ colors })
+export const theme = createTheme(themeOptions);

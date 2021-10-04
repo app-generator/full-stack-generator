@@ -1,46 +1,139 @@
-# node-react-seed
+# Full Stack Seed using OpenAPI, Express and React
 
-## Quick start
+This is a starter project using OpenAPI specifications to bind a NodeJs Express backend and a React frontend, using an [API-first approach](https://swagger.io/resources/articles/adopting-an-api-first-approach/).
+
+For a quick start, please consult the [Cheat Sheet](./CHEATSHEET.md).
+
+
+## Technology Stack
+
+
+### Backend
+
+- [Express](https://expressjs.com/) is the most popular NodeJs web framework; the following commonly used plugins have been included:
+  - [helmet](https://github.com/helmetjs/helmet) is a utility for setting HTTP headers
+  - [morgan](https://expressjs.com/en/resources/middleware/morgan.html) is a logging utility
+  - [cors](http://expressjs.com/en/resources/middleware/cors.html) is a utility for configuring cross origin request security
+  - [express-openapi-validator](https://github.com/cdimascio/express-openapi-validator) is a utility for validating API requests against the OpenAPI specification
+- [TypeORM](https://typeorm.io/#/) is an ORM that supports the `DataMapper` pattern, which makes is more attractive in combination with the "API first" approach
+- [Express JWT](https://github.com/auth0/express-jwt) and [JWKS-RSA](https://github.com/auth0/node-jwks-rsa) are two utilities for verifying a JWT token authenticity, in an OAuth2 / OpenID connect context
+
+
+### Frontend
+
+- [Create React App](https://reactjs.org/docs/create-a-new-react-app.html#create-react-app) is the most popular way to start with React; the Seed provides three UI alternatives:
+  - [Material UI](https://mui.com/)
+  - [Chakra UI](https://chakra-ui.com/)
+  - [React Bootstrap](https://react-bootstrap.github.io/)
+- [React Redux](https://react-redux.js.org/) is a state container using the immutable state / action / reducer pattern
+- [Recharts](https://recharts.org/en-US/) is a charts library built with React and D3
+- [React I18Next](https://react.i18next.com/) is a popular internationalization framework for React
+- [OpenID AppAuth-Js](https://github.com/openid/AppAuth-JS) is an OAuth2 / OpenID connect flow library 
+
+
+Both Backend and Frontend use [Typescript](https://www.typescriptlang.org/).
+
+
+## Project anatomy
+
+The project consists of 3 major components:
+
+- the __OpenAPI specification__
+- the __Backend__
+- the __Frontend__
+
+
+### The OpenAPI specification
+
+This is found in the [spec](./spec) folder.
+
+The up-to-date OpenAPI specification can be found [here](https://swagger.io/specification/).
+
+To improve maintainability, the spec is not provided as a single file, but broken into smaller pieces (read more about this [here](https://davidgarcia.dev/posts/how-to-split-open-api-spec-into-multiple-files/)).
+
+To assemble the API bundle, run this in the project root folder:
 
 ```
-docker-compose up
-yarn install
-yarn lerna:bootstrap
-yarn build
-yarn start
+yarn generate:spec
 ```
 
-The first time you run the project, you'll also need to populate the DB:
+This will combine all the smaller files into a single `api-bundle.yaml`. This file is in `.gitignore`, because we want to always have a single "source of truth" published.
+
+To generate Typescript code from the OpenAPI spec, run the following command in the project root folder:
 
 ```
-cd packages/backend
-yarn migrate
+yarn generate:api
 ```
 
-Be aware of an open `lerna` [bug](https://github.com/lerna/lerna/issues/2284) that orphans child processes when you exit the `run` command, so use the `yarn start` command only for demo purposes.
+This will create a folder called `generated` in `packages/frontend`, based on the [typescript-fetch](https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/typescript-fetch.md) generator. Note that this folder is also present in `.gitignore`, because the intention is to create it every time, during the CI/CD cycles.
 
-For development:
+The generated code will include:
+
+- Models
+- API Interfaces
+- API Client implementation using the [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+
+The Frontend will use these directly.
+
+The Backend will use them as follows:
+
+- The TypeORM Entity classes will implement the OpenAPI Models
+- The Services can implement the API interfaces (not possible yet due to [this](https://github.com/OpenAPITools/openapi-generator/issues/10237) bug)
+
+This will allow both the Frontend and the Backend to fail fast as soon as the API specification is changed.
+
+
+#### Note
+
+Upgrade OpenAPI generator version in [openapitools.json](./openapitools.json) when [this bug](https://github.com/OpenAPITools/openapi-generator/issues/10164) gets resolved.
+
+
+### The Backend
+
+The application setup, with the various middleware, the routes, as well as error handling, can be found in [index.ts](./packages/backend/src/index.ts).
+
+The ORM section, including Entities, Repositories and Migrations, can be found in [data](./packages/backend/src/data).
+
+The controllers are in [controller](./packages/backend/src/controller).
+
+There's also a [middleware](./packages/backend/src/middleware) folder, which contains any custom middleware you need to add (currently it only contains the Authorization middleware that verifies the Access Token received cryptographically).
+
+The Backend configuration is in the [.env](./packages/backend/src/.env) file. 
+
+This seed is configured with a SQLite persistence.
+
+
+### The Frontend
+
+In addition to the standard CRA output, the Frontend is organized as follows:
+
+Each feature has a folder inside the [features](./packages/frontend/src/features) folder; each feature folder should contain a React component (`.tsx`), a Redux slice, with the actions, reducers and side effects, and a test file. 
+
+Note that Redux is only necessary for "smart" components, that hold and manipulate a state. "Dumb" components, like [nav](./packages/frontend/src/features/nav) don't need it.
+
+Don't forget to add your Redux slice in the [store](./packages/frontend/src/app/store.ts) to make it functional.
+
+The Frontend also provides a [ui](./packages/frontend/ui) folder, that contains the components drawn using the three UI alternatives.
+
+To select one of them, use the corresponding script, in the `packages/frontend` folder:
 
 ```
-cd packages/backend
-yarn start
-
-cd packages/frontend
-yarn start
+yarn select-ui:mui
+yarn select-ui:chakra
+yarn select-ui:bootstrap
 ```
 
-For production builds, run (from the root directory):
+This will effectively replace the necessary components, as well as the theme, with the ones from the selected UI.
 
-```
-yarn build
-```
+Feel free to clean this folder once you have decided upon a UI provider (don't forget to also cleanup the [package.json](./packages/frontend/package.json), removing unnecessary dependencies).
 
-## Authentication
+The Frontend configuration is in the [.env](./packages/frontend/src/.env) file. 
+
+
+#### Authentication
+
+A special note for the authentication flow: this project uses the [Authentication Code flow with PKCE verification](https://auth0.com/docs/authorization/flows/authorization-code-flow-with-proof-key-for-code-exchange-pkce). The implementation is in [authService.ts](./packages/frontend/src/features/auth/authService.ts) and the routes can be protected using the [GuardedRoute.tsx](./packages/frontend/src/GuardedRoute.tsx) wrapper component.
 
 The project is configured with a demo Auth0 client.
 
 Modify the backend [.env](./packages/backend/.env) and frontend [.env](./packages/frontend/.env) to contain your IDP configuration.
-
-## Notes
-
-Upgrade OpenAPI generator version in [openapitools.json](./openapitools.json) when [this bug](https://github.com/OpenAPITools/openapi-generator/issues/10164) gets resolved.

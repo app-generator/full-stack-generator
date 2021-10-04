@@ -1,9 +1,38 @@
-import { Box, Flex, Heading, Progress, SimpleGrid, Text } from "@chakra-ui/react";
+import Card from "@mui/material/Card";
+import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
+import Grid from "@mui/material/Grid";
+import LinearProgress from "@mui/material/LinearProgress";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
 import moment from "moment";
-import { useEffect } from "react";
+import { CSSProperties, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { theme } from "../../theme";
 import { loadFrontPageArticles, selectLandingPage } from "./landingPageSlice";
+
+
+const jumbotronStyle: CSSProperties = {
+    height: 600,
+    backgroundColor: theme.palette.secondary.main,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+}
+
+const jumbotronTextStyle: CSSProperties = {
+    color: theme.palette.getContrastText(theme.palette.secondary.main)
+}
+
+const articleSectionStyle: CSSProperties = {
+    padding:10
+}
+
+const articleStyle: CSSProperties = {
+    height: 350
+}
 
 export const Landing = () => {
 
@@ -15,32 +44,31 @@ export const Landing = () => {
         dispatch(loadFrontPageArticles());
     }, [dispatch]);
 
-    return <Flex direction="column">
-        <Flex direction="column" bg="brand.900" alignItems="center">
-            <Heading as="h1" size="4xl" color="brand.100" marginTop={60}>
+    return <Paper style={{ flexGrow: 1 }}>
+        <Paper style={jumbotronStyle}>
+            <Typography variant="h1" component="h1" style={jumbotronTextStyle}>
                 {t('jumbotron.title')}
-            </Heading>
-            <Heading as="h2" size="2xl" color="brand.100" marginTop={20} marginBottom={20}>
+            </Typography>
+            <Typography variant="h2" component="h2" style={jumbotronTextStyle}>
                 {t('jumbotron.subtitle')}
-            </Heading>
-        </Flex>
-        {articleState.loading && <Progress />}
-        <SimpleGrid spacing={5} padding={5} minChildWidth={400}>
+            </Typography>
+        </Paper>
+        {articleState.loading && <LinearProgress />}
+        <Grid container spacing={5} style={articleSectionStyle}>
             {
                 articleState.articles.map(article => (
-                    <Box key={article.id} borderWidth="1px" borderRadius="lg" padding={3}>
-                        <Heading as="h3" size="md" marginBottom={5}>
-                            {article.title}
-                        </Heading>
-                        <Text as="h4" size="md">
-                            {moment(article.publishDate).format('L')}
-                        </Text>
-                        <Text as="p">
-                            {article.text}
-                        </Text>
-                    </Box>
+                    <Grid item xs={4} key={article.id}>
+                        <Card style={articleStyle}>
+                            <CardHeader title={article.title} subheader={moment(article.publishDate).format('L')} />
+                            <CardContent>
+                                <Typography variant="body2" color="text.secondary">
+                                    {article.text}
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    </Grid>
                 ))
             }
-        </SimpleGrid>
-    </Flex>
+        </Grid>
+    </Paper>
 }

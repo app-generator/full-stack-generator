@@ -1,4 +1,4 @@
-import { Button } from '@chakra-ui/react';
+import Button from '@mui/material/Button';
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { useHistory, useLocation } from "react-router-dom";
@@ -13,7 +13,7 @@ export const Nav = () => {
     const authState = useAppSelector(selectAuth);
 
     return <Fragment>
-        {authState.isAuthenticated && location.pathname !== '/dashboard' && <Button onClick={() => history.push('/dashboard')}>{t('dashboard')}</Button>}
-        {location.pathname !== '/' && <Button onClick={() => history.push('/')}>{t('home')}</Button>}
+        {authState.isAuthenticated && location.pathname !== '/dashboard' && <Button color="inherit" onClick={() => history.push('/dashboard')}>{t('dashboard')}</Button>}
+        {location.pathname !== '/' && <Button color="inherit" onClick={() => history.push('/')}>{t('home')}</Button>}
     </Fragment>
 }
