@@ -7,6 +7,26 @@ For a quick start, please consult the [Cheat Sheet](./CHEATSHEET.md).
 
 ## Technology Stack
 
+### Installation Prerequisites
+
+- [NodeJs](https://nodejs.org/en/) is the platform that runs the Backend and builds the Frontend
+- (Optional) [Yarn](https://yarnpkg.com/) is a package manager building on the NPM infrastructure; you can use `npm` instead
+- Java JRE is needed by the OpenAPI generator; if you don't want to install Java, you can still use the generator, via the [Docker image](https://openapi-generator.tech/docs/installation#docker):
+
+```
+docker run --rm \
+  -v ${PWD}:/local openapitools/openapi-generator-cli generate \
+  -i /local/api-bundle.yaml \
+  -g typescript-fetch \
+  -o /local/packages/generated
+  --additional-properties=typescriptThreePlus=true,withInterfaces=true
+```
+
+then compile using:
+
+```
+tsc --project tsconfig.openapi.json
+```
 
 ### Backend
 
