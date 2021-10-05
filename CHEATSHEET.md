@@ -4,6 +4,7 @@
 
 ```
 yarn install
+mkdir packages/generated  # this directory must exist
 yarn lerna:bootstrap
 yarn generate:spec
 yarn generate:api
