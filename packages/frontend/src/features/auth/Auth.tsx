@@ -11,6 +11,7 @@ import { checkAuth, selectAuth } from "./authSlice";
 export const Callback = () => {
   const dispatch = useAppDispatch();
   const [done, setDone] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(
     function () {
@@ -19,13 +20,13 @@ export const Callback = () => {
           dispatch(checkAuth());
           setDone(true);
         },
-        error => console.error(error)
+        err => setError(err)
       );
     },
     [dispatch]
   );
 
-  return done ? (<Redirect to="/dashboard" />) : (<div></div>)
+  return done ? (<Redirect to="/dashboard" />) : (!!error ? <Redirect to="/" /> : <div></div>)
 };
 
 export const AuthBox = () => {

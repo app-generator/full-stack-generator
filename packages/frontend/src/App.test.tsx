@@ -4,7 +4,8 @@ import App from './App';
 import { WithProviders } from './test-utils';
 
 test('renders app with main sections', () => {
-    render(<WithProviders>
+    const state = { auth: { isAuthenticated: false }, landingPage: { loading: false, articles: [] } };
+    render(<WithProviders reduxState={state}>
         <App />
     </WithProviders>);
     expect(screen.getByTestId("mainMenu")).toBeInTheDocument();
