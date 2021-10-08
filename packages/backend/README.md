@@ -3,5 +3,5 @@
 Create a new migration:
 
 ```
-yarn migrate:create -n MigrationName
+npm run migrate:create -n MigrationName
 ```

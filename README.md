@@ -10,7 +10,7 @@ For a quick start, please consult the [Cheat Sheet](./CHEATSHEET.md).
 ### Installation Prerequisites
 
 - [NodeJs](https://nodejs.org/en/) is the platform that runs the Backend and builds the Frontend
-- (Optional) [Yarn](https://yarnpkg.com/) is a package manager building on the NPM infrastructure; you can use `npm` instead
+  - [NPM](https://www.npmjs.com/) is the most popular package manager for the NodeJs ecosystem; to make use of the workspace monorepo architecture this project is built on, make sure you have at least version 7 of NPM installed
 - Java JRE is needed by the OpenAPI generator; if you don't want to install Java, you can still use the generator, via the [Docker image](https://openapi-generator.tech/docs/installation#docker):
 
 ```
@@ -74,7 +74,7 @@ To improve maintainability, the spec is not provided as a single file, but broke
 To assemble the API bundle, run this in the project root folder:
 
 ```
-yarn generate:spec
+npm run generate:spec
 ```
 
 This will combine all the smaller files into a single `api-bundle.yaml`. This file is in `.gitignore`, because we want to always have a single "source of truth" published.
@@ -82,7 +82,7 @@ This will combine all the smaller files into a single `api-bundle.yaml`. This fi
 To generate Typescript code from the OpenAPI spec, run the following command in the project root folder:
 
 ```
-yarn generate:api
+npm run generate:api
 ```
 
 This will create a folder called `generated` in `packages/frontend`, based on the [typescript-fetch](https://github.com/OpenAPITools/openapi-generator/blob/master/docs/generators/typescript-fetch.md) generator. Note that this folder is also present in `.gitignore`, because the intention is to create it every time, during the CI/CD cycles.
@@ -138,9 +138,9 @@ The Frontend also provides a [ui](./packages/frontend/ui) folder, that contains 
 To select one of them, use the corresponding script, in the `packages/frontend` folder:
 
 ```
-yarn select-ui:mui
-yarn select-ui:chakra
-yarn select-ui:bootstrap
+npm run select-ui:mui
+npm run select-ui:chakra
+npm run select-ui:bootstrap
 ```
 
 This will effectively replace the necessary components, as well as the theme, with the ones from the selected UI.

@@ -1,6 +1,7 @@
 {
   "name": "express-react-seed",
   "version": "1.0.0",
+  "private": true,
   "description": "Express-React-OpenAPI seed",
   "main": "index.js",
   "devDependencies": {
@@ -10,12 +11,15 @@
     "typescript": "^4.3.5"
   },
   "scripts": {
-    "lerna:bootstrap": "lerna bootstrap",
+    "postinstall": "lerna bootstrap",
     "lerna:ls": "lerna ls",
     "generate:spec": "swagger-cli bundle spec/api.yaml -o api-bundle.yaml -t yaml",
     "generate:api": "openapi-generator-cli generate -g typescript-fetch -i api-bundle.yaml -o ./packages/generated --additional-properties=typescriptThreePlus=true,withInterfaces=true && tsc --project tsconfig.openapi.json",
     "build": "npm run generate:spec && npm run generate:api && lerna run build",
-    "start": "lerna run start --parallel"
+    "frontend:start": "npm start -w express-react-seed-frontend",
+    "backend:start": "npm start -w express-react-seed-backend",
+    "backend:migrate": "npm run migrate -w express-react-seed-backend",
+    "test": "npm test -ws"
   },
   "repository": {
     "type": "git",
@@ -35,5 +39,10 @@
   "dependencies": {
     "@chakra-ui/react": "^1.6.8",
     "framer-motion": "^4.1.17"
-  }
+  },
+  "workspaces": [
+    "./packages/backend",
+    "./packages/frontend",
+    "./packages/generated"
+  ]
 }

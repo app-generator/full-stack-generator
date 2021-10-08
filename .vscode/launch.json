@@ -1,0 +1,45 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug Tests Single Run",
+            "type": "node",
+            "request": "launch",
+            "env": { "CI": "true" },
+            "runtimeExecutable": "${workspaceRoot}/packages/frontend/node_modules/.bin/react-scripts",
+            "args": ["test", "--runInBand", "--no-cache"],
+            "cwd": "${workspaceRoot}/packages/frontend",
+            "protocol": "inspector",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+          },
+          {
+            "name": "Debug tests watch mode",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "${workspaceRoot}/packages/frontend/node_modules/.bin/react-scripts",
+            "args": ["test", "--runInBand", "--no-cache", "--watchAll"],
+            "cwd": "${workspaceRoot}/packages/frontend",
+            "protocol": "inspector",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+          },
+          {
+            "name": "Debug tests opened file",
+            "type": "node",
+            "request": "launch",
+            "runtimeExecutable": "${workspaceRoot}/packages/frontend/node_modules/.bin/react-scripts",
+            "args": [
+              "test",
+              "${fileBasenameNoExtension}",
+              "--runInBand",
+              "--no-cache",
+              "--watchAll"
+            ],
+            "cwd": "${workspaceRoot}/packages/frontend",
+            "protocol": "inspector",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+          }
+    ]
+}

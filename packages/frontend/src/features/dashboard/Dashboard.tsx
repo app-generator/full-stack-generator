@@ -49,15 +49,15 @@ export const Dashboard = () => {
 
     return <Grid container spacing={5}>
         <Grid item xs={12}>
-            <Card>
+            <Card data-testid="table-card">
                 <CardHeader title={t('dashboard.table')} />
                 <CardContent style={{ height: 400, width: '100%' }}>
-                    <DataGrid rows={dashboardState.table.data} columns={columns} rowsPerPageOptions={[]} pageSize={5} localeText={localizeDataGrid(t)} />
+                    <DataGrid rows={dashboardState.table.data} columns={columns} rowsPerPageOptions={[5,10]} pageSize={5} localeText={localizeDataGrid(t)} />
                 </CardContent>
             </Card>
         </Grid>
         <Grid item xs={4}>
-            <Card>
+            <Card data-testid="bar-chart-card">
                 <CardHeader title={t('dashboard.barChart')} />
                 <CardContent>
                     {dashboardState.barChart.loading ? (<CircularProgress />) : (
@@ -75,7 +75,7 @@ export const Dashboard = () => {
             </Card>
         </Grid>
         <Grid item xs={4}>
-            <Card >
+            <Card data-testid="time-series-card">
                 <CardHeader title={t('dashboard.timeSeries')} />
                 <CardContent>
                     {dashboardState.timeSeries.loading ? (<CircularProgress />) : (
@@ -93,7 +93,7 @@ export const Dashboard = () => {
             </Card>
         </Grid>
         <Grid item xs={4}>
-            <Card>
+            <Card data-testid="pie-chart-card">
                 <CardHeader title={t('dashboard.pieChart')} />
                 <CardContent style={{ width: '100%', height: '100%' }}>
                     {dashboardState.pieChart.loading ? (<CircularProgress />) : (

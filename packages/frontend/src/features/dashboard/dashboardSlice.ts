@@ -13,7 +13,7 @@ export interface DashboardState {
   timeSeries: { data: Data[], loading: boolean };
 }
 
-const initialState: DashboardState = {
+export const initialState: DashboardState = {
   pieChart: { data: [], loading: false },
   table: { data: [], loading: false },
   barChart: { data: [], loading: false },
@@ -27,22 +27,22 @@ const api = () =>
     })
   );
 
-export const loadPieChartData = createAsyncThunk(
+export const loadPieChartData = createAsyncThunk<Data[]>(
   "dashboard/loadPieChartData",
   async () =>  api().withPreMiddleware(authHeaderMiddleware).getData({ type: 'FOR_PIE_CHART' })
 );
 
-export const loadTableData = createAsyncThunk(
+export const loadTableData = createAsyncThunk<Data[]>(
   "dashboard/loadTableData",
   async () =>  api().withPreMiddleware(authHeaderMiddleware).getData({ type: 'FOR_TABLE' })
 );
 
-export const loadTimeSeriesData = createAsyncThunk(
+export const loadTimeSeriesData = createAsyncThunk<Data[]>(
   "dashboard/loadTimeSeriesData",
   async () =>  api().withPreMiddleware(authHeaderMiddleware).getData({ type: 'FOR_TIME_SERIES' })
 );
 
-export const loadBarChartData = createAsyncThunk(
+export const loadBarChartData = createAsyncThunk<Data[]>(
   "dashboard/loadBarChartData",
   async () =>  api().withPreMiddleware(authHeaderMiddleware).getData({ type: 'FOR_BAR_CHART' })
 );
