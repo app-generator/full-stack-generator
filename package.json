@@ -19,7 +19,8 @@
     "frontend:start": "npm start -w express-react-seed-frontend",
     "backend:start": "npm start -w express-react-seed-backend",
     "backend:migrate": "npm run migrate -w express-react-seed-backend",
-    "test": "npm test -ws"
+    "pretest": "npm run generate:spec && npm run generate:api",
+    "test": "npm run test -ws"
   },
   "repository": {
     "type": "git",
