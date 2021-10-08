@@ -9,8 +9,7 @@
     "start": "ts-node-dev --respawn --pretty --transpile-only src/index.ts",
     "migrate": "ts-node --transpile-only node_modules/typeorm/cli.js migration:run",
     "migrate:bootstrap": "ts-node --transpile-only node_modules/typeorm/cli.js migration:generate -n CreateDatabase",
-    "migrate:create": "ts-node --transpile-only node_modules/typeorm/cli.js migration:create",
-    "test":"echo 'no tests for backend (yet)'"
+    "migrate:create": "ts-node --transpile-only node_modules/typeorm/cli.js migration:create"
   },
   "repository": {
     "type": "git",

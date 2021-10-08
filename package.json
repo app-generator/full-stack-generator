@@ -12,15 +12,13 @@
   },
   "scripts": {
     "postinstall": "lerna bootstrap",
+    "prepare": "npm run generate:spec && npm run generate:api",
     "lerna:ls": "lerna ls",
     "generate:spec": "swagger-cli bundle spec/api.yaml -o api-bundle.yaml -t yaml",
     "generate:api": "openapi-generator-cli generate -g typescript-fetch -i api-bundle.yaml -o ./packages/generated --additional-properties=typescriptThreePlus=true,withInterfaces=true && tsc --project tsconfig.openapi.json",
-    "build": "npm run generate:spec && npm run generate:api && lerna run build",
     "frontend:start": "npm start -w express-react-seed-frontend",
     "backend:start": "npm start -w express-react-seed-backend",
-    "backend:migrate": "npm run migrate -w express-react-seed-backend",
-    "pretest": "npm run generate:spec && npm run generate:api",
-    "test": "npm run test -ws"
+    "backend:migrate": "npm run migrate -w express-react-seed-backend"
   },
   "repository": {
     "type": "git",

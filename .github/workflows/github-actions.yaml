@@ -28,4 +28,4 @@ jobs:
       - name: Test
         env: 
           CI: true
-        run: npm test
+        run: npm run test --workspaces --if-present
