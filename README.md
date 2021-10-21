@@ -45,6 +45,7 @@ tsc --project tsconfig.openapi.json
   - [Material UI](https://mui.com/)
   - [Chakra UI](https://chakra-ui.com/)
   - [React Bootstrap](https://react-bootstrap.github.io/)
+  - [Ant Design](https://ant.design/)
 - [React Redux](https://react-redux.js.org/) is a state container using the immutable state / action / reducer pattern
 - [Recharts](https://recharts.org/en-US/) is a charts library built with React and D3
 - [React I18Next](https://react.i18next.com/) is a popular internationalization framework for React
@@ -141,6 +142,7 @@ To select one of them, use the corresponding script, in the `packages/frontend` 
 npm run select-ui:mui
 npm run select-ui:chakra
 npm run select-ui:bootstrap
+npm run select-ui:antd
 ```
 
 This will effectively replace the necessary components, as well as the theme, with the ones from the selected UI.
