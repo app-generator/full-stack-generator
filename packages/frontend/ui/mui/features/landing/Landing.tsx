@@ -46,15 +46,15 @@ export const Landing = () => {
 
     return <Paper style={{ flexGrow: 1 }}>
         <Paper style={jumbotronStyle}>
-            <Typography variant="h1" component="h1" style={jumbotronTextStyle}>
+            <Typography data-testid="landing-title" variant="h1" component="h1" style={jumbotronTextStyle}>
                 {t('jumbotron.title')}
             </Typography>
-            <Typography variant="h2" component="h2" style={jumbotronTextStyle}>
+            <Typography data-testid="landing-subtitle" variant="h2" component="h2" style={jumbotronTextStyle}>
                 {t('jumbotron.subtitle')}
             </Typography>
         </Paper>
         {articleState.loading && <LinearProgress />}
-        <Grid container spacing={5} style={articleSectionStyle}>
+        <Grid container spacing={5} style={articleSectionStyle} data-testid="landing-articles">
             {
                 articleState.articles.map(article => (
                     <Grid item xs={4} key={article.id}>

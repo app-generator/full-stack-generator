@@ -55,7 +55,7 @@ export const Dashboard = () => {
     return <Container fluid>
         <Row>
             <Col xs={12}>
-                <Card className="p-3 mb-5">
+                <Card data-testid="table-card" className="p-3 mb-5">
                     <Card.Title>{t('dashboard.table')}</Card.Title>
                     <Card.Body>
                         <Table striped bordered hover size="sm">
@@ -78,7 +78,7 @@ export const Dashboard = () => {
                 </Card>
             </Col>
             <Col xs={4}>
-                <Card className="p-3">
+                <Card data-testid="bar-chart-card" className="p-3">
                     <Card.Title>{t('dashboard.barChart')}</Card.Title>
                     <Card.Body>
                         {dashboardState.barChart.loading ? (<Spinner animation="border" />) : (
@@ -96,7 +96,7 @@ export const Dashboard = () => {
                 </Card>
             </Col>
             <Col xs={4}>
-                <Card className="p-3">
+                <Card data-testid="time-series-card" className="p-3">
                     <Card.Title>{t('dashboard.timeSeries')}</Card.Title>
                     <Card.Body>
                         {dashboardState.timeSeries.loading ? (<Spinner animation="border" />) : (
@@ -114,7 +114,7 @@ export const Dashboard = () => {
                 </Card>
             </Col>
             <Col xs={4}>
-                <Card className="p-3">
+                <Card data-testid="pie-chart-card" className="p-3">
                     <Card.Title>{t('dashboard.pieChart')} </Card.Title>
                     <Card.Body style={{ width: '100%', height: '100%' }}>
                         {dashboardState.pieChart.loading ? (<Spinner animation="border" />) : (

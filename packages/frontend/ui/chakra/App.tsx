@@ -18,24 +18,26 @@ export default function App() {
   return (
     <ChakraProvider theme={theme}>
       <Flex grow={1} direction="column">
-        <Flex as="nav" bg="brand.100" padding={2} direction="row" justifyContent="space-between" alignItems="center">
-          <Flex alignItems="center">
-            <img src={logo} alt="AppSeed" style={{ maxWidth: 200 }} />
+        <Flex data-testid="mainMenu" as="nav" bg="brand.100" padding={2} direction="row" justifyContent="space-between" alignItems="center">
+          <Flex data-testid="leftToolbar" alignItems="center">
+            <img data-testid="logo" src={logo} alt="AppSeed" style={{ maxWidth: 200 }} />
             <Nav />
           </Flex>
           <Flex>
             <AuthBox />
           </Flex>
         </Flex>
-        <Switch>
-          <Route exact path="/">
-            <Landing />
-          </Route>
-          <GuardedRoute path="/dashboard" predicate={() => authState.isAuthenticated}>
-            <Dashboard />
-          </GuardedRoute>
-          <Route exact path="/callback" component={Callback} />
-        </Switch>
+        <Flex data-testid="mainContent">
+          <Switch>
+            <Route exact path="/">
+              <Landing />
+            </Route>
+            <GuardedRoute path="/dashboard" predicate={() => authState.isAuthenticated}>
+              <Dashboard />
+            </GuardedRoute>
+            <Route exact path="/callback" component={Callback} />
+          </Switch>
+        </Flex>
       </Flex>
     </ChakraProvider>
   );

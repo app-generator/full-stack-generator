@@ -13,7 +13,7 @@ export const Nav = () => {
     const authState = useAppSelector(selectAuth);
 
     return <Fragment>
-        {authState.isAuthenticated && location.pathname !== '/dashboard' && <Button color="inherit" onClick={() => history.push('/dashboard')}>{t('dashboard')}</Button>}
-        {location.pathname !== '/' && <Button color="inherit" onClick={() => history.push('/')}>{t('home')}</Button>}
+        {authState.isAuthenticated && location.pathname !== '/dashboard' && <Button data-testid="dashboard-link" color="inherit" onClick={() => history.push('/dashboard')}>{t('dashboard')}</Button>}
+        {location.pathname !== '/' && <Button data-testid="home-link" color="inherit" onClick={() => history.push('/')}>{t('home')}</Button>}
     </Fragment>
 }

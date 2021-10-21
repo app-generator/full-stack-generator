@@ -42,11 +42,11 @@ export const AuthBox = () => {
   );
 
   return authState.isAuthenticated ? (
-    <Button onClick={() => { logout(); dispatch(checkAuth()); history.push('/'); }}>
+    <Button data-testid="logoutButton" onClick={() => { logout(); dispatch(checkAuth()); history.push('/'); }}>
       {t("app.logout")}
     </Button>
   ) : (
-    <Button onClick={() => login()}>
+    <Button data-testid="loginButton" onClick={() => login()}>
       {t("app.login")}
     </Button>
   );

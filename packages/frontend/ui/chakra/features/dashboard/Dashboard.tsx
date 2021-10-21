@@ -54,7 +54,7 @@ export const Dashboard = () => {
 
 
     return <Flex direction="column" padding={5}>
-        <Box marginBottom={10}>
+        <Box marginBottom={10} data-testid="table-card">
             <Heading as="h3">{t('dashboard.table')}</Heading>
             {dashboardState.barChart.loading ? (<CircularProgress />) : (
                 <Table variant="simple">
@@ -76,7 +76,7 @@ export const Dashboard = () => {
             )}
         </Box>
         <SimpleGrid minChildWidth={600}>
-            <Box>
+            <Box data-testid="bar-chart-card">
                 <Heading as="h3">{t('dashboard.barChart')}</Heading>
                 {dashboardState.barChart.loading ? (<CircularProgress />) : (
                     <ResponsiveContainer width="80%" height="80%" minWidth={500} minHeight={500}>
@@ -90,7 +90,7 @@ export const Dashboard = () => {
                     </ResponsiveContainer>
                 )}
             </Box>
-            <Box>
+            <Box data-testid="time-series-card">
                 <Heading as="h3">{t('dashboard.timeSeries')}</Heading>
                 {dashboardState.timeSeries.loading ? (<CircularProgress />) : (
                     <ResponsiveContainer width="80%" height="80%" minWidth={500} minHeight={500}>
@@ -104,7 +104,7 @@ export const Dashboard = () => {
                     </ResponsiveContainer>
                 )}
             </Box>
-            <Box>
+            <Box data-testid="pie-chart-card">
                 <Heading>{t('dashboard.pieChart')}</Heading>
                 {dashboardState.pieChart.loading ? (<CircularProgress />) : (
                     <ResponsiveContainer width="80%" height="80%" minWidth={500} minHeight={500}>

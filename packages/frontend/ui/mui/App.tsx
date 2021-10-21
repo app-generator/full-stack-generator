@@ -14,8 +14,6 @@ import GuardedRoute from "./GuardedRoute";
 import logo from "./logo.png";
 import { theme } from "./theme";
 
-
-
 const appBarStyle: CSSProperties = {
   display: "inline-flex",
   flexDirection: 'row',
@@ -29,16 +27,16 @@ export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <div style={{ flexGrow: 1 }}>
-        <AppBar position="static" style={appBarStyle}>
-          <Toolbar>
-            <img src={logo} alt="AppSeed" style={{ maxWidth: 200 }} />
+        <AppBar data-testid="mainMenu" position="static" style={appBarStyle}>
+          <Toolbar data-testid="leftToolbar">
+            <img data-testid="logo" src={logo} alt="AppSeed" style={{ maxWidth: 200 }} />
             <Nav />
           </Toolbar>
           <Toolbar>
-            <AuthBox />
+            <AuthBox/>
           </Toolbar>
         </AppBar>
-        <Paper style={{ marginTop: -10 }}>
+        <Paper data-testid="mainContent" style={{ marginTop: -10 }}>
           <Switch>
             <Route exact path="/">
               <Landing />

@@ -17,15 +17,15 @@ export const Landing = () => {
 
     return <Flex direction="column">
         <Flex direction="column" bg="brand.900" alignItems="center">
-            <Heading as="h1" size="4xl" color="brand.100" marginTop={60}>
+            <Heading data-testid="landing-title" as="h1" size="4xl" color="brand.100" marginTop={60}>
                 {t('jumbotron.title')}
             </Heading>
-            <Heading as="h2" size="2xl" color="brand.100" marginTop={20} marginBottom={20}>
+            <Heading data-testid="landing-subtitle" as="h2" size="2xl" color="brand.100" marginTop={20} marginBottom={20}>
                 {t('jumbotron.subtitle')}
             </Heading>
         </Flex>
         {articleState.loading && <Progress />}
-        <SimpleGrid spacing={5} padding={5} minChildWidth={400}>
+        <SimpleGrid spacing={5} padding={5} minChildWidth={400} data-testid="landing-articles">
             {
                 articleState.articles.map(article => (
                     <Box key={article.id} borderWidth="1px" borderRadius="lg" padding={3}>

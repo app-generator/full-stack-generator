@@ -21,15 +21,15 @@ export const Landing = () => {
 
     return <Container fluid>
         <Row className="bg-primary mb-5">
-            <h1 className="text-center text-light" style={{ marginTop: 150, marginBottom: 100 }}>
+            <h1 data-testid="landing-title" className="text-center text-light" style={{ marginTop: 150, marginBottom: 100 }}>
                 {t('jumbotron.title')}
             </h1>
-            <h2 className="text-center text-light" style={{ marginBottom: 100 }}>
+            <h2 data-testid="landing-subtitle" className="text-center text-light" style={{ marginBottom: 100 }}>
                 {t('jumbotron.subtitle')}
             </h2>
         </Row>
         {articleState.loading && <ProgressBar />}
-        <Row>
+        <Row data-testid="landing-articles">
             {
                 articleState.articles.map(article => (
                     <Col xs={4} key={article.id}>
