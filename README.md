@@ -25,7 +25,7 @@ docker run --rm \
 then compile using:
 
 ```
-tsc --project tsconfig.openapi.json
+tsc --project tsconfig.openapi.json 
 ```
 
 ### Backend
