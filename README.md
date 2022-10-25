@@ -1,8 +1,6 @@
-# Full Stack Seed using OpenAPI, Express and React
+# Full-Stack Generator - `Express` & `React`
 
-This is a starter project using OpenAPI specifications to bind a NodeJs Express backend and a React frontend, using an [API-first approach](https://swagger.io/resources/articles/adopting-an-api-first-approach/).
-
-For a quick start, please consult the [Cheat Sheet](./CHEATSHEET.md).
+This is a starter project using OpenAPI specifications to bind a NodeJs Express backend and a React frontend, using an `API-first approach - For a quick start, please consult the [Cheat Sheet](./CHEATSHEET.md).
 
 <br />
 
@@ -11,6 +9,8 @@ For a quick start, please consult the [Cheat Sheet](./CHEATSHEET.md).
 | Status | Item | info | 
 | --- | --- | --- |
 | ✅ | **Codebase** | `TypeScript` & `Best Practices` |
+| ✅ | **Backend** | NodeJS, Express |
+| ✅ | **React UI** | MUI, Chakra, AntD |
 | ✅ | **Authentication** | `OAuth` |
 | ✅ | **ORM** | `TypeORM` |
 | ❌ | **Authorization** | Roles: `Admins`, `Common` Users |
@@ -47,6 +47,8 @@ then compile using:
 tsc --project tsconfig.openapi.json 
 ```
 
+<br />
+
 ### Backend
 
 - [Express](https://expressjs.com/) is the most popular NodeJs web framework; the following commonly used plugins have been included:
@@ -57,6 +59,7 @@ tsc --project tsconfig.openapi.json
 - [TypeORM](https://typeorm.io/#/) is an ORM that supports the `DataMapper` pattern, which makes is more attractive in combination with the "API first" approach
 - [Express JWT](https://github.com/auth0/express-jwt) and [JWKS-RSA](https://github.com/auth0/node-jwks-rsa) are two utilities for verifying a JWT token authenticity, in an OAuth2 / OpenID connect context
 
+<br />
 
 ### Frontend
 
@@ -70,9 +73,9 @@ tsc --project tsconfig.openapi.json
 - [React I18Next](https://react.i18next.com/) is a popular internationalization framework for React
 - [OpenID AppAuth-Js](https://github.com/openid/AppAuth-JS) is an OAuth2 / OpenID connect flow library 
 
-
 Both Backend and Frontend use [Typescript](https://www.typescriptlang.org/).
 
+<br />
 
 ## Project anatomy
 
@@ -82,6 +85,7 @@ The project consists of 3 major components:
 - the __Backend__
 - the __Frontend__
 
+<br />
 
 ### The OpenAPI specification
 
@@ -122,11 +126,13 @@ The Backend will use them as follows:
 
 This will allow both the Frontend and the Backend to fail fast as soon as the API specification is changed.
 
+<br />
 
 #### Note
 
 Upgrade OpenAPI generator version in [openapitools.json](./openapitools.json) when [this bug](https://github.com/OpenAPITools/openapi-generator/issues/10164) gets resolved.
 
+<br />
 
 ### The Backend
 
@@ -142,6 +148,7 @@ The Backend configuration is in the [.env](./packages/backend/src/.env) file.
 
 This seed is configured with a SQLite persistence.
 
+<br />
 
 ### The Frontend
 
@@ -170,6 +177,7 @@ Feel free to clean this folder once you have decided upon a UI provider (don't f
 
 The Frontend configuration is in the [.env](./packages/frontend/src/.env) file. 
 
+<br />
 
 #### Authentication
 
@@ -195,3 +203,8 @@ For the Authentication Code flow, you'll need the following items:
 Note that all OpenID providers have a `.well-known` path containing many of the information you require, once you are onboarded (e.g. https://node-seed.eu.auth0.com/.well-known/openid-configuration)
 
 If you want to test the solution locally, you can also use Keycloak, the most popular open source IDP - for example using their [Docker guide](https://www.keycloak.org/getting-started/getting-started-docker).
+
+<br />
+
+---
+Full-Stack Generator - `Express` & `React`, free starter provided by [AppSeed](https://appseed.us/)
