@@ -4,6 +4,25 @@ This is a starter project using OpenAPI specifications to bind a NodeJs Express 
 
 For a quick start, please consult the [Cheat Sheet](./CHEATSHEET.md).
 
+<br />
+
+> Roadmap & Features 
+
+| Status | Item | info | 
+| --- | --- | --- |
+| ✅ | **Codebase** | `TypeScript` & `Best Practices` |
+| ✅ | **Authentication** | `OAuth` |
+| ✅ | **ORM** | `TypeORM` |
+| ❌ | **Authorization** | Roles: `Admins`, `Common` Users |
+| ❌ | **User Profiles** | Profile information + Image |
+| ❌ | - | `Common Users`: Edit their profiles |
+| ❌ | - | `Admins`: Edit all profiles |
+| ❌ | **Background tasks** | Start, Cancel, Check Status, GET LOGS |
+| ❌ | **Deployment** | `Docker` |
+| ❌ | **CI/CD** | Render Deployment Platform |
+| ❌ | **Unitary Tests** | - |
+
+<br />
 
 ## Technology Stack
 
