@@ -6,14 +6,11 @@
   "main": "index.js",
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.4.4",
-    "lerna": "^4.0.0",
     "swagger-cli": "^4.0.4",
     "typescript": "^4.3.5"
   },
   "scripts": {
-    "postinstall": "lerna bootstrap",
     "prepare": "npm run generate:spec && npm run generate:api",
-    "lerna:ls": "lerna ls",
     "generate:spec": "swagger-cli bundle spec/api.yaml -o api-bundle.yaml -t yaml",
     "generate:api": "openapi-generator-cli generate -g typescript-fetch -i api-bundle.yaml -o ./packages/generated --additional-properties=typescriptThreePlus=true,withInterfaces=true && tsc --project tsconfig.openapi.json",
     "frontend:start": "npm start -w express-react-seed-frontend",

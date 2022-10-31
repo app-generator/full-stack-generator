@@ -30,7 +30,7 @@ export async function main(): Promise<void> {
 
   await createConnection();
 
-  const apiSpec = "../../api-bundle.yaml";
+  const apiSpec = process.env.API_PATH || "../../api-bundle.yaml";
   /**
    *  App Configuration
    */
@@ -42,9 +42,9 @@ export async function main(): Promise<void> {
   app.use(
     OpenApiValidator.middleware({
       apiSpec,
-      validateRequests: true, 
+      validateRequests: true,
       // validateResponses: true,
-      ignoreUndocumented: true 
+      ignoreUndocumented: true
     })
   );
 
